@@ -6,15 +6,19 @@ class tennisScore {
   
     point(player){
         if(player === "player1Win"){ 
-            this.player1Score += 15 
-            console.log(player)
+            this.player1Score += 15
         };
         if(player === "player2Win"){
             this.player2Score +=15
-            console.log(player)
+        }
+        if(this.player1Score === 45 ){
+            this.player1Score -= 5;
+        }
+        if(this.player2Score === 45){
+            this.player2Score -= 5;
         }
     } 
-
+    
     get score(){
         return`${this.player1Score} - ${this.player2Score}`
    }
