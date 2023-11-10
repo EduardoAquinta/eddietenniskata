@@ -1,0 +1,15 @@
+{
+  "name": "tennis",
+  "version": "1.0.0",
+  "description": "tennis kata",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "author": "eduardoaquinta",
+  "license": "ISC",
+  "dependencies": {
+    "jest": "^29.7.0"
+  },
+  "type": "module"
+}

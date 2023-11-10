@@ -15,6 +15,16 @@ describe("The basic set up", () => {
         game.point("player2Win");
         expect(game.score).toBe("0 - 15")
     })
+    it("adds 15 to player1, who won the point at 15-15", () => {
+        const game = new tennisScore(15, 15)
+        game.point("player1Win");
+        expect(game.score).toBe("30 - 15")
+    })
+    it("adds 15 to player2, who won the point at 15-15", () => {
+        const game = new tennisScore(15, 15)
+        game.point("player2Win");
+        expect(game.score).toBe("15 - 30")
+    })
     it("adds 15 to player 1 when the score is 15-0, makes 30-0", () => {
         const game = new tennisScore(15, 0)
         game.point("player1Win");
@@ -34,5 +44,35 @@ describe("The basic set up", () => {
         const game = new tennisScore(0, 30);
         game.point("player2Win");
         expect(game.score).toBe("0 - 40")
+    })
+    it("adds 10 when player1 score is 30, makes 40-15", () => {
+        const game = new tennisScore(30, 15);
+        game.point("player1Win");
+        expect(game.score).toBe("40 - 15")
+    })
+    it("adds 10 when player2 score is 30, makes 15-40", () => {
+        const game = new tennisScore(15, 30);
+        game.point("player2Win");
+        expect(game.score).toBe("15 - 40")
+    })
+    it("adds 10 when player1 score is 30, makes 40-30", () => {
+        const game = new tennisScore(30, 30);
+        game.point("player1Win");
+        expect(game.score).toBe("40 - 30")
+    })
+    it("adds 10 when player2 score is 30, makes 30-40", () => {
+        const game = new tennisScore(30, 30);
+        game.point("player2Win");
+        expect(game.score).toBe("30 - 40")
+    })
+    it("player1 gets advantage if they score at 40 - 40", () => {
+        const game = new tennisScore(40, 40);
+        game.point("player1Win");
+        expect(game.score).toBe("ADV - 40")
+    })
+    it("player2 gets advantage if they score at 40 - 40", () => {
+        const game = new tennisScore(40, 40);
+        game.point("player2Win");
+        expect(game.score).toBe("40 - ADV")
     })
 });
