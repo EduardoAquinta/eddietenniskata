@@ -5,6 +5,8 @@ describe("The basic set up", () => {
         const game = new tennisScore(0, 0)
         expect(game.score).toBe("0 - 0")
     })
+});
+describe("The basic early game", () => {
     it("adds 15 to player1,  who won the point", () => {
         const game = new tennisScore(0, 0);
         game.point("player1Win")
@@ -35,6 +37,8 @@ describe("The basic set up", () => {
         game.point("player2Win");
         expect(game.score).toBe("0 - 30")
     })
+});
+describe("The game over 30 points", () => {
     it("adds 10 when player1 score is 30, makes 40-0", () => {
         const game = new tennisScore(30, 0);
         game.point("player1Win");
@@ -65,14 +69,76 @@ describe("The basic set up", () => {
         game.point("player2Win");
         expect(game.score).toBe("30 - 40")
     })
+});
+describe("The game once Deuce gets involved", () => {
     it("player1 gets advantage if they score at 40 - 40", () => {
         const game = new tennisScore(40, 40);
+        game.deuce()
         game.point("player1Win");
         expect(game.score).toBe("ADV - 40")
     })
     it("player2 gets advantage if they score at 40 - 40", () => {
         const game = new tennisScore(40, 40);
+        game.deuce()
         game.point("player2Win");
         expect(game.score).toBe("40 - ADV")
+    })
+    it("player1 gets deuce if they score at 40 - ADV", () => {
+        const game = new tennisScore(40, "ADV");
+        game.deuce()
+        game.point("player1Win");
+        expect(game.score).toBe("40 - 40")
+    })
+    it("player2 gets deuce if they score at ADV - 40", () => {
+        const game = new tennisScore("ADV", 40);
+        game.deuce();
+        game.point("player2Win");
+        expect(game.score).toBe("40 - 40")
+    })
+});
+describe("Winning the game", () => {
+    it("player1 wins the game if the score at 40 - 0", () => {
+        const game = new tennisScore(40, 0);
+        game.point("player1Win");
+        expect(game.score).toBe("Player1 wins the game")
+    })
+    it("player2 wins the game if the score at 0 - 40", () => {
+        const game = new tennisScore(0, 40);
+        game.point("player2Win");
+        expect(game.score).toBe("Player2 wins the game")
+    })
+    it("player1 wins the game if the score at 40 - 15", () => {
+        const game = new tennisScore(40, 15);
+        game.point("player1Win");
+        expect(game.score).toBe("Player1 wins the game")
+    })
+    it("player2 wins the game if the score at 15 - 40", () => {
+        const game = new tennisScore(15, 40);
+        game.point("player2Win");
+        expect(game.score).toBe("Player2 wins the game")
+    })
+    it("player1 wins the game if the score at 40 - 30", () => {
+        const game = new tennisScore(40, 30);
+        game.point("player1Win");
+        expect(game.score).toBe("Player1 wins the game")
+    })
+    it("player2 wins the game if the score at 30 - 40", () => {
+        const game = new tennisScore(30, 40);
+        game.point("player2Win");
+        expect(game.score).toBe("Player2 wins the game")
+    })
+});
+describe("Winning the game at deuce", () => {
+    it("player1 wins the game if the score at ADV - 40", () => {
+        const game = new tennisScore("ADV", 40);
+        game.deuce()
+        game.point("player1Win");
+        expect(game.score).toBe("Player1 wins the game")
+    })
+    it("player2 wins the game if the score at 40 - ADV", () => {
+        const game = new tennisScore(40, "ADV");
+        game.deuce()
+        game.point("player2Win");
+        expect(game.score).toBe("Player2 wins the game")
     })
 });
